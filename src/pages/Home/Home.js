@@ -3,6 +3,7 @@ import Banner from '../Shared/Banner';
 import Info from './Info';
 import Services from './Services';
 import bannerBg from '../../assets/images/chair.png';
+import Appointment from './Appointment';
 
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
             </div>
             <Info></Info>
             <Services></Services>
+            <Appointment></Appointment>
         </div >
     );
 };
