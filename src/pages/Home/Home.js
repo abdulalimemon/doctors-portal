@@ -5,6 +5,7 @@ import Services from './Services';
 import bannerBg from '../../assets/images/chair.png';
 import Appointment from './Appointment';
 import Testimonial from './Testimonial';
+import Contact from './Contact';
 
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
             <Services></Services>
             <Appointment></Appointment>
             <Testimonial></Testimonial>
+            <Contact></Contact>
         </div >
     );
 };
