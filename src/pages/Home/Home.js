@@ -6,6 +6,7 @@ import bannerBg from '../../assets/images/chair.png';
 import Appointment from './Appointment';
 import Testimonial from './Testimonial';
 import Contact from './Contact';
+import Footer from '../Shared/Footer';
 
 
 const Home = () => {
@@ -19,6 +20,7 @@ const Home = () => {
             <Appointment></Appointment>
             <Testimonial></Testimonial>
             <Contact></Contact>
+            <Footer></Footer>
         </div >
     );
 };

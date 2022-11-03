@@ -9,3 +9,9 @@
     background-repeat: no-repeat;
     background-position: cover; 
 }
+
+.footerBg{
+    background-image: url(./assets/images/footer.png);
+    background-repeat: no-repeat;
+    background-position: cover; 
+}
