@@ -12,15 +12,15 @@ const Navbar = () => {
     </>
     return (
         <div className="container mx-auto navbar bg-base-100">
-            <div className="navbar-start">
+            <div className="navbar-start lg:w-1/4">
                 <Link className="btn btn-ghost normal-case text-xl" to='/'>Doctors Portal</Link>
             </div>
-            <div className="navbar-end hidden lg:flex">
+            <div className="navbar-end lg:w-3/4 hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
                     {menuItems}
                 </ul>
             </div>
-            <div className="navbar-end  lg:hidden">
+            <div className="navbar-end lg:w-3/4 lg:hidden">
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
