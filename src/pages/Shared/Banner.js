@@ -3,7 +3,7 @@ import bannerBg from '../../assets/images/chair.png';
 
 
 
-const Banner = () => {
+const Banner = ({bannerBg, title, description}) => {
    
     return (
         <div className="hero min-h-screen bannerBg">
