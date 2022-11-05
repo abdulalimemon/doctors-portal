@@ -4,8 +4,8 @@ const Banner = ({img, title, description, backgroundImage, display, height, marg
    
     return (
         <div className={`hero py-10 lg:py-16 ${backgroundImage}`}>
-            <div className={`hero-content ${display}`}>
-                <img src={img} className={`mt-3 lg:mt-0  ${height} rounded-lg shadow-2xl`} alt='Banner' />
+            <div className={`hero-content lg:mt-0 ${display}`}>
+                <img src={img} className={`mt-3 ${height} rounded-lg shadow-2xl`} alt='Banner' />
                 <div className={`${marginLeft}`}>
                     <h2 className="text-3xl mt-5 lg:mt-0 lg:text-5xl font-bold text-accent">{title}</h2>
                     <p className="py-6">{description}</p>

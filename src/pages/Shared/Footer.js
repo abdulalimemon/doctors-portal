@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer class="footerBg">
-            <div class="container px-5 pt-16 pb-8 mx-auto">
-                <div class="flex flex-wrap md:text-left text-center">
+        <footer className="footerBg">
+            <div className="container px-5 pt-16 pb-8 mx-auto">
+                <div className="flex flex-wrap md:text-left text-center">
                     <div className="md:w-1/3 w-full px-4">
                         <h2 className="font-semibold text-accent text-lg mb-3">SERVICES</h2>
                         <nav className="list-none mb-10">
@@ -46,8 +46,8 @@ const Footer = () => {
                         </nav>
                     </div>
                 </div>
-                <div class="px-5 pt-6 text-center">
-                    <p class="text-lg text-accent font-semibold mt-4">
+                <div className="px-5 pt-6 text-center">
+                    <p className="text-lg text-accent font-semibold mt-4">
                         Copyright 2022 All Rights Reserved
                     </p>
                 </div>

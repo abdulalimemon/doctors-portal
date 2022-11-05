@@ -3,7 +3,7 @@ import img from '../../assets/images/doctor.png';
 
 
 
-const Appointment = () => {
+const AppointmentHome = () => {
     return (
         <div className='appointmentBg'>
             <div className='container mx-auto'>
@@ -23,4 +23,4 @@ const Appointment = () => {
     );
 };
 
-export default Appointment;
+export default AppointmentHome;
