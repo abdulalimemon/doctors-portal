@@ -7,7 +7,7 @@ import AvailableServices from './AvailableServices';
 
 
 const Appointment = () => {
-    const [date, setDate] = useState([new Date()]);
+    const [date, setDate] = useState(new Date());
     return (
         <div>
             <Navbar></Navbar>
