@@ -2,25 +2,36 @@ import React from 'react';
 import Footer from '../Shared/Footer';
 import Navbar from '../Shared/Navbar';
 import googleIcon from '../../assets/images/google.png';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
-
-
-
+import Loading from '../Shared/Loading';
 
 
 
 const Login = () => {
-    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
-    if (user) {
-        console.log(user);
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
+    const [
+        signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
+
+    if (gUser || user) {
+        console.log(user, gUser);
     }
+
+    if (error || gError) {
+        console.log(error?.message, gError?.message);
+    }
+
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const onSubmit = (data) => {
         console.log(data);
+        signInWithEmailAndPassword(data.email, data.password);
     }
+    if (loading || gLoading) {
+        return <Loading></Loading>;
+    }
+
     return (
         <>
             <Navbar></Navbar>
