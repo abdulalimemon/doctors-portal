@@ -6,6 +6,7 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
+import { Link } from 'react-router-dom';
 
 
 
@@ -18,16 +19,13 @@ const Login = () => {
         console.log(user, gUser);
     }
 
-    if (error || gError) {
-        console.log(error?.message, gError?.message);
-    }
-
 
     const { register, formState: { errors }, handleSubmit } = useForm();
     const onSubmit = (data) => {
         console.log(data);
         signInWithEmailAndPassword(data.email, data.password);
     }
+
     if (loading || gLoading) {
         return <Loading></Loading>;
     }
@@ -91,9 +89,14 @@ const Login = () => {
                                     <div className='form-control w-full'>
                                         <input type="submit" value='Login' className='btn bg-gradient-to-r from-secondary to-primary border-0 text-white font-bold capitalize text-lg' />
                                     </div>
+                                    <p className='text-center text-sm pt-3 font-medium'>New to Doctors Portal? <Link to='/signup' className='text-secondary'>Create new account</Link></p>
+                                    {error?.message === 'Firebase: Error (auth/user-not-found).' && <p className='text-red-600 text-lg font-semibold pt-3 text-center'>User Not Found</p>}
+                                    {error?.message === 'Firebase: Error (auth/wrong-password).' && <p className='text-red-600 text-lg font-semibold pt-3 text-center'>Wrong password</p>}
+                                    {error?.message === 'Firebase: Error (auth/invalid-email).' && <p className='text-red-600 text-lg font-semibold pt-3 text-center'>Invalid Email</p>}
+                                    {(error?.message || gError?.message) && <p className='text-red-600 text-lg font-semibold pt-3 text-center'>{error?.message}</p>}
 
                                 </form>
-                                <div className="divider">OR</div>
+                                <div className="divider font-semibold">OR</div>
                                 <button
                                     className="btn btn-outline capitalize"
                                     onClick={() => signInWithGoogle()}>
