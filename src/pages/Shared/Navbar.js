@@ -26,8 +26,8 @@ const Navbar = () => {
         }
     </>
     return (
-        <div className='bg-secondary relative'>
-            <div className='container mx-auto fixed top-0 left-0 right-0 z-10'>
+        <div className=''>
+            <div className='container mx-auto'>
                 <div className="navbar">
                     <div className="navbar-start lg:w-1/4">
                         <Link className="btn btn-ghost normal-case text-xl" to='/'>Doctors Portal</Link>

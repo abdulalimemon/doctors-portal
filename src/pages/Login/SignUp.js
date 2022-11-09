@@ -1,44 +1,37 @@
 import React from 'react';
 import Footer from '../Shared/Footer';
 import Navbar from '../Shared/Navbar';
-import googleIcon from '../../assets/images/google.png';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-
+import SocialLogin from './SocialLogin';
 
 const SignUp = () => {
-    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, uError] = useUpdateProfile(auth);
     const navigate = useNavigate();
-
-    const location = useLocation();
-    let from = location.state?.from?.pathname || "/";
-
-    if (gUser || user) {
-        console.log(user, gUser);
-        navigate(from, { replace: true });
-    }
-
     const { register, formState: { errors }, handleSubmit } = useForm();
+
     const onSubmit = async (data) => {
         console.log(data);
         await createUserWithEmailAndPassword(data.email, data.password);
-        await updateProfile({displayName: data.name});
+        await updateProfile({ displayName: data.name });
         navigate('/appointment');
     }
 
-    if (loading || gLoading || updating) {
+    if (user) {
+        console.log(user);
+    }
+
+    if (loading || updating) {
         return <Loading></Loading>;
     }
 
-    if (gError || error || uError) {
-        toast.error((gError?.message, error?.message), {
+    if (error || uError) {
+        toast.error((error?.message), {
             theme: "colored",
         })
     }
@@ -128,14 +121,9 @@ const SignUp = () => {
                                     <p className='text-center text-sm pt-3 font-medium'>Already have an account? <Link to='/login' className='text-secondary'>Login now</Link></p>
                                 </form>
                                 <div className="divider">OR</div>
-                                <button
-                                    className="btn btn-outline capitalize"
-                                    onClick={() => signInWithGoogle()}>
-                                    <span className='mr-2'>
-                                        <img src={googleIcon} className='w-7 md:w-10' alt="Google icon" />
-                                    </span>
-                                    Continue With Google
-                                </button>
+                                <div className='w-full'>
+                                    <SocialLogin></SocialLogin>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,36 +1,35 @@
 import React from 'react';
 import Footer from '../Shared/Footer';
 import Navbar from '../Shared/Navbar';
-import googleIcon from '../../assets/images/google.png';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-
+import { useEffect } from 'react';
+import SocialLogin from './SocialLogin';
 
 
 const Login = () => {
-    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-    const [
-        signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
     const navigate = useNavigate();
     const location = useLocation();
-    let from = location.state?.from?.pathname || "/";
-
-    if (gUser || user) {
-        console.log(user, gUser);
-        navigate(from, { replace: true });
-    }
-
-
+    const from = location.state?.from?.pathname || "/";
+    const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
+
     const onSubmit = (data) => {
         console.log(data);
         signInWithEmailAndPassword(data.email, data.password);
     }
 
-    if (loading || gLoading) {
+    useEffect(() => {
+        if (user) {
+            console.log(user);
+            navigate(from, { replace: true });
+        }
+    }, [user, from, navigate]);
+
+    if (loading) {
         return <Loading></Loading>;
     }
 
@@ -97,18 +96,13 @@ const Login = () => {
                                     {error?.message === 'Firebase: Error (auth/user-not-found).' && <p className='text-red-600 text-lg font-semibold pt-3 text-center'>User Not Found</p>}
                                     {error?.message === 'Firebase: Error (auth/wrong-password).' && <p className='text-red-600 text-lg font-semibold pt-3 text-center'>Wrong password</p>}
                                     {error?.message === 'Firebase: Error (auth/invalid-email).' && <p className='text-red-600 text-lg font-semibold pt-3 text-center'>Invalid Email</p>}
-                                    {(error?.message || gError?.message) && <p className='text-red-600 text-lg font-semibold pt-3 text-center'>{error?.message}</p>}
+                                    {(error?.message) && <p className='text-red-600 text-lg font-semibold pt-3 text-center'>{error?.message}</p>}
 
                                 </form>
                                 <div className="divider font-semibold">OR</div>
-                                <button
-                                    className="btn btn-outline capitalize"
-                                    onClick={() => signInWithGoogle()}>
-                                    <span className='mr-2'>
-                                        <img src={googleIcon} className='w-7 md:w-10' alt="Google icon" />
-                                    </span>
-                                    Continue With Google
-                                </button>
+                                <div className='w-full'>
+                                    <SocialLogin></SocialLogin>
+                                </div>
                             </div>
                         </div>
                     </div>
