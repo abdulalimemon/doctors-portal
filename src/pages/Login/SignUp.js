@@ -2,36 +2,39 @@ import React from 'react';
 import Footer from '../Shared/Footer';
 import Navbar from '../Shared/Navbar';
 import googleIcon from '../../assets/images/google.png';
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
 
 const SignUp = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-    const [
-        createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating, uError] = useUpdateProfile(auth);
+    const navigate = useNavigate();
 
     if (gUser || user) {
         console.log(user, gUser);
     }
 
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log(data);
-        createUserWithEmailAndPassword(data.email, data.password);
+        await createUserWithEmailAndPassword(data.email, data.password);
+        await updateProfile({displayName: data.name});
+        navigate('/');
     }
 
-    if (loading || gLoading) {
+    if (loading || gLoading || updating) {
         return <Loading></Loading>;
     }
 
-    if(gError || error){
-        toast.error((gError?.message, error?.message) , {
+    if (gError || error || uError) {
+        toast.error((gError?.message, error?.message), {
             theme: "colored",
         })
     }
@@ -57,11 +60,16 @@ const SignUp = () => {
                                                 required: {
                                                     value: true,
                                                     message: 'Name is Required'
+                                                },
+                                                minLength: {
+                                                    value: 3,
+                                                    message: 'Name must be 3 characters or longer.'
                                                 }
                                             })}
                                             aria-invalid={errors.name ? "true" : "false"} />
                                         <label className="label">
                                             {errors.name?.type === 'required' && <span className="label-text-alt text-red-600 font-semibold">{errors.name.message}</span>}
+                                            {errors.name?.type === 'minLength' && <span className="label-text-alt text-red-600 font-semibold">{errors.name.message}</span>}
                                         </label>
                                     </div>
                                     <div className="form-control w-full pb-1">

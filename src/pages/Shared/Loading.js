@@ -7,10 +7,9 @@ import Navbar from './Navbar';
 const Loading = () => {
     return (
         <>
-            <Navbar></Navbar>
             <div>
                 <div className='container mx-auto'>
-                    <div className='h-[70vh] flex items-center justify-center'>
+                    <div className='h-[100vh] flex items-center justify-center'>
                         <Bars
                             height="80"
                             width="80"
@@ -23,7 +22,6 @@ const Loading = () => {
                     </div>
                 </div>
             </div>
-            <Footer></Footer>
         </>
 
     );
