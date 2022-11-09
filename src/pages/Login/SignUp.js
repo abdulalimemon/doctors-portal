@@ -6,7 +6,7 @@ import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfil
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
@@ -17,8 +17,12 @@ const SignUp = () => {
     const [updateProfile, updating, uError] = useUpdateProfile(auth);
     const navigate = useNavigate();
 
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+
     if (gUser || user) {
         console.log(user, gUser);
+        navigate(from, { replace: true });
     }
 
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -26,7 +30,7 @@ const SignUp = () => {
         console.log(data);
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({displayName: data.name});
-        navigate('/');
+        navigate('/appointment');
     }
 
     if (loading || gLoading || updating) {

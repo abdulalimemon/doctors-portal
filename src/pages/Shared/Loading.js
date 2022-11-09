@@ -1,7 +1,5 @@
 import React from 'react';
 import { Bars } from 'react-loader-spinner';
-import Footer from './Footer';
-import Navbar from './Navbar';
 
 
 const Loading = () => {
