@@ -5,21 +5,27 @@ import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-fireb
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Shared/Loading';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import SocialLogin from './SocialLogin';
 
 const SignUp = () => {
-    const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth);
+    const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating, uError] = useUpdateProfile(auth);
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const onSubmit = async (data) => {
         console.log(data);
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
-        navigate('/appointment');
+        await navigate(from, { replace: true });
+
+        await toast.success('An user verification email has been sent to your email address. Please check your inbox or spam folder.', {
+            theme: "colored",
+        });
     }
 
     if (user) {
@@ -31,9 +37,9 @@ const SignUp = () => {
     }
 
     if (error || uError) {
-        toast.error((error?.message), {
+        toast.error(`Something went wrong. you got this error '${error?.message}'`, {
             theme: "colored",
-        })
+        });
     }
 
     return (
@@ -42,7 +48,7 @@ const SignUp = () => {
             <div>
                 <div className='container mx-auto'>
                     <div className='py-10 md:py-14 lg:py-20 flex justify-center items-center'>
-                        <div className="card w-11/12 md:w-8/12 lg:w-5/12 mx-auto bg-base-100 rounded-lg shadow-xl">
+                        <div className="card w-11/12 md:w-8/12 lg:w-6/12 mx-auto bg-base-100 rounded-lg shadow-xl">
                             <div className="card-body px-4 md:px-6">
                                 <h2 className="text-2xl font-bold text-center">Sign Up</h2>
                                 <form onSubmit={handleSubmit(onSubmit)}>

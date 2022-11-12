@@ -17,9 +17,9 @@ const Login = () => {
     const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log(data);
-        signInWithEmailAndPassword(data.email, data.password);
+        await signInWithEmailAndPassword(data.email, data.password);
     }
 
     useEffect(() => {
@@ -38,8 +38,8 @@ const Login = () => {
             <Navbar></Navbar>
             <div>
                 <div className='container mx-auto'>
-                    <div className='h-[90vh] flex justify-center items-center'>
-                        <div className="card w-11/12 md:w-8/12 lg:w-5/12 mx-auto bg-base-100 rounded-lg shadow-xl">
+                    <div className='py-10 md:py-14 lg:py-20 flex justify-center items-center'>
+                        <div className="card w-11/12 md:w-8/12 lg:w-6/12 mx-auto bg-base-100 rounded-lg shadow-xl">
                             <div className="card-body px-4 md:px-6">
                                 <h2 className="text-2xl font-bold text-center">Login</h2>
                                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -92,7 +92,13 @@ const Login = () => {
                                     <div className='form-control w-full'>
                                         <input type="submit" value='Login' className='btn bg-gradient-to-r from-secondary to-primary border-0 text-white font-bold capitalize text-lg' />
                                     </div>
-                                    <p className='text-center text-sm pt-3 font-medium'>New to Doctors Portal? <Link to='/signup' className='text-secondary'>Create new account</Link></p>
+                                    <div>
+                                        <div className='flex flex-col-reverse lg:justify-between lg:flex-row'>
+                                            <p className='text-center lg:text-start text-sm pt-3 font-medium'>New to Doctors Portal? <Link to='/signup' className='text-secondary'>Create new account</Link></p>
+                                            <p className='text-center lg:text-end text-sm pt-3 font-medium'><Link to='/forgotpassword' className='text-secondary'>Forgot Password?</Link></p>
+                                        </div>
+                                    </div>
+
                                     {error?.message === 'Firebase: Error (auth/user-not-found).' && <p className='text-red-600 text-lg font-semibold pt-3 text-center'>User Not Found</p>}
                                     {error?.message === 'Firebase: Error (auth/wrong-password).' && <p className='text-red-600 text-lg font-semibold pt-3 text-center'>Wrong password</p>}
                                     {error?.message === 'Firebase: Error (auth/invalid-email).' && <p className='text-red-600 text-lg font-semibold pt-3 text-center'>Invalid Email</p>}
