@@ -19,6 +19,7 @@ function App() {
         <Route path='/home' element={<Home></Home>}></Route>
 
         {/* <Route path='/' element={}></Route> */}
+
         <Route path='/forgotpassword' element={<ForgotPassword></ForgotPassword>}></Route>
 
         <Route path='/login' element={<Login></Login>}></Route>
