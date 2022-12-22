@@ -9,6 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import RequireAuth from './pages/Login/RequireAuth';
 import NotFound from './pages/Shared/NotFound';
 import ForgotPassword from './pages/Login/ForgotPassword';
+import Dashboard from './pages/Dashboard/Dashboard';
+import DashboardReview from './pages/Dashboard/DashboardReview';
 
 function App() {
   return (
@@ -28,6 +30,12 @@ function App() {
         <Route path='/appointment' element={<RequireAuth>
           <Appointment></Appointment>
         </RequireAuth>}></Route>
+
+        <Route path='/dashboard' element={<RequireAuth>
+          <Dashboard></Dashboard>
+        </RequireAuth>}>
+          <Route path='' element={<DashboardReview></DashboardReview>}></Route>
+        </Route>
 
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>

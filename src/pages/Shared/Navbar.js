@@ -19,6 +19,9 @@ const Navbar = () => {
         <li><Link to='/review'>Reviews</Link></li>
         <li><Link to='/contact'>Contact Us</Link></li>
         {
+            user && <li><Link to='/dashboard'>Dashboard</Link></li>
+        }
+        {
             user ?
                 <><li><Link onClick={() => { UserSignOut() }}>Sign Out</Link></li></>
                 :
