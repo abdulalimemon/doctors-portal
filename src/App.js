@@ -11,6 +11,8 @@ import NotFound from './pages/Shared/NotFound';
 import ForgotPassword from './pages/Login/ForgotPassword';
 import Dashboard from './pages/Dashboard/Dashboard';
 import DashboardReview from './pages/Dashboard/DashboardReview';
+import MyAppointment from './pages/Dashboard/MyAppointment';
+import DashboardFront from './pages/Dashboard/DashboardFront';
 
 function App() {
   return (
@@ -34,7 +36,9 @@ function App() {
         <Route path='/dashboard' element={<RequireAuth>
           <Dashboard></Dashboard>
         </RequireAuth>}>
-          <Route path='' element={<DashboardReview></DashboardReview>}></Route>
+          <Route index element={<DashboardFront></DashboardFront>}></Route>
+          <Route path='myappointment' element={<MyAppointment></MyAppointment>}></Route>
+          <Route path='review' element={<DashboardReview></DashboardReview>}></Route>
         </Route>
 
         <Route path='*' element={<NotFound></NotFound>}></Route>

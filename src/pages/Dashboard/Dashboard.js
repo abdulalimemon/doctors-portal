@@ -14,32 +14,25 @@ const Dashboard = () => {
                         <label htmlFor="my-drawer-2" className="btn btn-outline drawer-button lg:hidden"><span className='mr-2'>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </span> Menu</label>
-                        <h2 className='text-black text-3xl font-semibold text-center py-5'>Welcome to your Dashboard</h2>
                         <Outlet></Outlet>
-
-
                     </div>
                     <div className="drawer-side">
                         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                        <div className='menu p-4 w-11/12 md:w-80 xl:w-60 bg-slate-600'>
-                            <div className='flex flex-row justify-end'>
-                                <div className='basis-4/5'>
-                                    <ul className="text-slate-200 font-semibold text-lg">
-
-                                        <li><Link to=''>Sidebar Item 1</Link></li>
-                                        <li><Link to=''>Sidebar Item 2</Link></li>
-                                    </ul>
-                                </div>
-                                <div className='basis-1/5'>
-                                    <label htmlFor="my-drawer-2" className="btn btn-circle drawer-button lg:hidden">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                                    </label>
-                                </div>
+                        <div className='menu p-4 lg:p-0 lg:py-4 w-9/12 md:w-80 xl:w-60 bg-slate-600'>
+                            <div className='flex justify-between items-center lg:hidden'>
+                                <h3 className="text-slate-200 font-semibold text-lg">Menu</h3>
+                                <label htmlFor="my-drawer-2" className="w-9 h-9 bg-slate-200 lg:hidden flex justify-center items-center rounded-full">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                                </label>
                             </div>
-
+                            <div>
+                                <ul className="text-slate-200 font-semibold text-md xl:text-lg">
+                                    <li><Link to='/dashboard'>Dashboard</Link></li>
+                                    <li><Link to='/dashboard/myappointment'>Appointment</Link></li>
+                                    <li><Link to='/dashboard/review'>Review</Link></li>
+                                </ul>
+                            </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
