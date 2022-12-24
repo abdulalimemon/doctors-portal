@@ -27,9 +27,9 @@ const Dashboard = () => {
                             </div>
                             <div>
                                 <ul className="text-slate-200 font-semibold text-md xl:text-lg">
-                                    <li><Link to='/dashboard'>Dashboard</Link></li>
-                                    <li><Link to='/dashboard/myappointment'>Appointment</Link></li>
-                                    <li><Link to='/dashboard/review'>Review</Link></li>
+                                    <li className='hover:border-r-4 hover:border-green-600'><Link to='/dashboard'>Dashboard</Link></li>
+                                    <li className='hover:border-r-4 hover:border-green-600'><Link to='/dashboard/myappointment'>Appointment</Link></li>
+                                    <li className='hover:border-r-4 hover:border-green-600'><Link to='/dashboard/review'>Review</Link></li>
                                 </ul>
                             </div>
                         </div>

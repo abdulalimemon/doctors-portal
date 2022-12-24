@@ -8,12 +8,15 @@ import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import SocialLogin from './SocialLogin';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
     const [createUserWithEmailAndPassword, user, loading, error,] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating, uError] = useUpdateProfile(auth);
     const navigate = useNavigate();
     const location = useLocation();
+
+    const [token] = useToken(user);
     const from = location.state?.from?.pathname || "/";
     const { register, formState: { errors }, handleSubmit } = useForm();
 

@@ -3,7 +3,17 @@
 @tailwind utilities;
 
 
+.menu[class*=" p-"] li > *, .menu[class^="p-"] li > * {
+  border-radius: 0px;
+}
 
+.menu :where(li:not(.menu-title):not(:empty)) > :where(:not(ul).active),
+  .menu :where(li:not(.menu-title):not(:empty)) > :where(*:not(ul):active) {
+    --tw-bg-opacity: none;
+    background-color: hsl(var(--p) / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: hsl(var(--pc) / var(--tw-text-opacity));
+}
 
 body {
   margin: 0;
