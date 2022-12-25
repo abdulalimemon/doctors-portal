@@ -24,15 +24,16 @@ const SignUp = () => {
         console.log(data);
         await createUserWithEmailAndPassword(data.email, data.password);
         await updateProfile({ displayName: data.name });
-        await navigate(from, { replace: true });
+         
 
         await toast.success('An user verification email has been sent to your email address. Please check your inbox or spam folder.', {
             theme: "colored",
         });
     }
 
-    if (user) {
+    if (token) {
         console.log(user);
+        navigate(from, { replace: true });
     }
 
     if (loading || updating) {

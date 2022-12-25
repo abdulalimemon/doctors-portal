@@ -1,9 +1,14 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, Outlet } from 'react-router-dom';
+import auth from '../../firebase.init';
+import useAdmin from '../../hooks/useAdmin';
 import Footer from '../Shared/Footer';
 import Navbar from '../Shared/Navbar';
 
 const Dashboard = () => {
+    const [user] = useAuthState(auth);
+    const [admin] = useAdmin(user);
     return (
         <div>
             <Navbar></Navbar>
@@ -30,6 +35,10 @@ const Dashboard = () => {
                                     <li className='hover:border-r-4 hover:border-green-600'><Link to='/dashboard'>Dashboard</Link></li>
                                     <li className='hover:border-r-4 hover:border-green-600'><Link to='/dashboard/myappointment'>Appointment</Link></li>
                                     <li className='hover:border-r-4 hover:border-green-600'><Link to='/dashboard/review'>Review</Link></li>
+                                    {
+                                        admin && <li className='hover:border-r-4 hover:border-green-600'><Link to='/dashboard/users'>All Users</Link></li>
+                                    }
+
                                 </ul>
                             </div>
                         </div>

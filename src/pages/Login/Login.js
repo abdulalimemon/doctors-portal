@@ -8,6 +8,7 @@ import Loading from '../Shared/Loading';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import SocialLogin from './SocialLogin';
+import useToken from '../../hooks/useToken';
 
 
 const Login = () => {
@@ -15,6 +16,7 @@ const Login = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
     const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
+    const [token] = useToken(user);
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const onSubmit = async (data) => {
@@ -23,11 +25,10 @@ const Login = () => {
     }
 
     useEffect(() => {
-        if (user) {
-            console.log(user);
+        if (token) {
             navigate(from, { replace: true });
         }
-    }, [user, from, navigate]);
+    }, [token, from, navigate]);
 
     if (loading) {
         return <Loading></Loading>;
