@@ -4,7 +4,7 @@ import UserRow from './UserRow';
 import Loading from '../Shared/Loading';
 
 const Users = () => {
-    const { data: users, isLoading, refetch } = useQuery('users', () => fetch(`http://localhost:5000/user`, {
+    const { data: users, isLoading, refetch } = useQuery('users', () => fetch(`https://doctors-portal-server-0ji0.onrender.com/user`, {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${localStorage.getItem('accessToken')}`

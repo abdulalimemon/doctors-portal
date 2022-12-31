@@ -36,7 +36,10 @@ const Dashboard = () => {
                                     <li className='hover:border-r-4 hover:border-green-600'><Link to='/dashboard/myappointment'>Appointment</Link></li>
                                     <li className='hover:border-r-4 hover:border-green-600'><Link to='/dashboard/review'>Review</Link></li>
                                     {
-                                        admin && <li className='hover:border-r-4 hover:border-green-600'><Link to='/dashboard/users'>All Users</Link></li>
+                                        admin && <>
+                                            <li className='hover:border-r-4 hover:border-green-600'><Link to='/dashboard/users'>All Users</Link></li>
+                                            <li className='hover:border-r-4 hover:border-green-600'><Link to='/dashboard/add-doctor'>Add Doctor</Link></li>
+                                        </>
                                     }
 
                                 </ul>
